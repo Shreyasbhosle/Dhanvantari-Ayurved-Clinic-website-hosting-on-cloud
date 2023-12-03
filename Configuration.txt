@@ -1,0 +1,41 @@
+Configuration
+
+3)       Commands:
+         1) ubuntu
+         2) sudo apt-get update
+         3) sudo apt-get install apache2
+         4) sudo apt-get install php libapache2-mod-php php-mysql
+         5) sudo systemctl restart apache2
+         6) sudo chmod 777 /var/www/html -R
+         7) sudo apt install mysql-client
+         8) telnet php-database.cicrulv4urjd.us-east-1.rds.amazonaws.com 3306
+         9) mysql -u admin -h php-database.cicrulv4urjd.us-east-1.rds.amazonaws.com -p
+
+MySQL COMMANDS:
+
+Password: shreyash
+Rest create your database;
+Create your tables as per your applcation need with mysql commands.
+
+Open Filezilla-Client:
+
+Go to SFTP
+    Add the Website.ppk just downloaded
+          Click on OK
+
+
+
+    Add hostname: <Public_Ip of EC2>
+    Username: ubuntu
+    password: shreyash
+    port: 22
+
+Click on Quick connect.
+
+
+Now on right side go to '/' folder.
+Now go into var/www/html
+Add your PHP folder which i had sent you there.
+
+
+
