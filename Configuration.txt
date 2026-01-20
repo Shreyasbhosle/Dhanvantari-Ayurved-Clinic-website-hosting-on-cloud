@@ -1,6 +1,30 @@
-Configuration
+1) Create a new EC2 instance:
+   Select ubuntu
+   .ppk key pair
+   Edit Network settings
+   Select subnet with east-1a
+   Add security groups - HTTP and HTTPS with anywhere access.
 
-3)       Commands:
+2) Create Database Instance:
+   Select MySQL
+   Free Tier Template
+   Disable auto scaling
+   Public Access: Yes
+   Create new VPC security groups: 
+   Availability Zone: east - 1a
+
+//Change inbound security rules in network security. Add MSSQL source and Anywhere in it.
+//Add the following to php connection files
+$server = <database_instance_endpoint>; //Eg:cart.c12rgtfnbkyw.us-east-1.rds.amazonaws.com
+$username = "admin";
+$password = <password>;
+$database = <database_name>;
+
+$conn = mysqli_connect($server, $username, $password, $database); 
+
+3) Inside Putty:
+
+  Commands:
          1) ubuntu
          2) sudo apt-get update
          3) sudo apt-get install apache2
@@ -8,34 +32,22 @@ Configuration
          5) sudo systemctl restart apache2
          6) sudo chmod 777 /var/www/html -R
          7) sudo apt install mysql-client
-         8) telnet php-database.cicrulv4urjd.us-east-1.rds.amazonaws.com 3306
-         9) mysql -u admin -h php-database.cicrulv4urjd.us-east-1.rds.amazonaws.com -p
+         8) telnet <database_endpoint> 3306
+//If you get Trying <ip> then security groups in database inbound are not allowing access.
+         9) mysql -u admin -h <database_endpoint> -p
+//Enter your database password.
+//Add data in the mysql through the command line and enter last command exit; at the end to end mysql database.
+//show databases;
+//create database <database_name>
+//create and insert values in table as per use case.
 
-MySQL COMMANDS:
+4) Inside FileZilla:
+  Go to Edit->Settings->SFTP->Add key pair(.ppk) -> OK
+  Hostname :<Public_EC2_IP> , username: ubuntu, password: <Your password>, port:22
+  Quick connect.
+  Go in main ('/') folder -> var->www->html
+  Add your php folder within var/www/html and delete index.html
 
-Password: shreyash
-Rest create your database;
-Create your tables as per your applcation need with mysql commands.
+Note : (Add php files in folder and add folder to html folder).
 
-Open Filezilla-Client:
-
-Go to SFTP
-    Add the Website.ppk just downloaded
-          Click on OK
-
-
-
-    Add hostname: <Public_Ip of EC2>
-    Username: ubuntu
-    password: shreyash
-    port: 22
-
-Click on Quick connect.
-
-
-Now on right side go to '/' folder.
-Now go into var/www/html
-Add your PHP folder which i had sent you there.
-
-
-
+open <Public_EC2_IP>/<PHP_Folder_Name>/<PHP_FILE_NAME.php> in browser
